@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id             String   @id @default(uuid())
+  title          String
+  description    String
+  specifications String // Stored as JSON string
+  logoUrl        String?
+  pdfUrl         String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  news           News[]
+  profitYear3    Float?
+  profitYear4    Float?
+  profitYear5    Float?
+  profitYear6    Float?
+  profitYear7    Float?
+  profitYear8    Float?
+  profitYear9    Float?
+  profitYear10   Float?
+}
+
+model News {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  imageUrls   String   @default("[]") // Stored as JSON string
+  publishedAt DateTime @default(now())
+  projectId   String?
+  project     Project? @relation(fields: [projectId], references: [id])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Member {
+  id               String   @id @default(uuid())
+  name             String
+  phone            String   @unique
+  email            String?
+  password         String
+  investmentAmount String?
+  preferredLocation String?
+  referralSource   String?
+  questions        String? // JSON string
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Settings {
+  id           String   @id @default(uuid())
+  phoneNumber  String?
+  address      String?
+  facebookUrl  String?
+  twitterUrl   String?
+  instagramUrl String?
+  linkedinUrl  String?
+  whatsappNumber String?
+  workingHours   String?
+  holidays       String?
+  logoUrl      String?
+  siteName     String?
+  workStartTime String? // Format: "HH:mm"
+  workEndTime   String? // Format: "HH:mm"
+  updatedAt    DateTime @updatedAt
+}
+
+model HeroSlide {
+  id          String   @id @default(uuid())
+  imageUrl    String
+  title       String?
+  description String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String?
+  phone     String?
+  whatsapp  String?
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model TeamMember {
+  id        String   @id @default(uuid())
+  name      String
+  jobTitle  String?
+  bio       String?  // New field for quote/description
+  imageUrl  String?
+  videoUrl  String?
+  type      String   @default("TEAM") // TEAM or PARTNER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Feature {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  icon        String?
+  image       String?
+  content     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

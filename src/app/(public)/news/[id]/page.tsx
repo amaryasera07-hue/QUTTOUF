@@ -62,12 +62,16 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                     <Link href="/news" className="text-emerald-600 hover:underline flex items-center gap-1">
                         <ArrowRight size={16} /> العودة للأخبار
                     </Link>
-
-                    {news.project && (
-                        <Link href={`/projects/${news.project.id}`}>
-                            <Button variant="outline" className="border-emerald-200 text-emerald-700 hover:bg-emerald-100">
-                                عرض المشروع المرتبط
-                            </Button>
+{/* احذف هذا الجزء لأنه غير موجود */}
+{/* 
+{news.project && (
+    <Link href={/projects/${news.project.id}}>
+        <Button variant="outline" className="border-emerald-200 text-emerald-700 hover:bg-emerald-50">
+            مشروع المرتبط
+        </Button>
+    </Link>
+)}
+*/}
                         </Link>
                     )}
                 </div>
